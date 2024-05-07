@@ -12,28 +12,35 @@ struct ContentView: View {
     @State var selected: Place? = nil
     var body: some View {
         NavigationView{
+            VStack {
                 List(placeManager.places){ place in
-                    NavigationLink(destination: DetailView(place: place)){
-                        ListView(place: place)
-                            .onTapGesture {
-                                selected = place
-                            }
+                        NavigationLink(destination: DetailView(place: place)){
+                            ListView(place: place)
+                                .onTapGesture {
+                                    selected = place
+                                }
+                        }
                     }
-                }
-                .listStyle(.plain)
-            
-            .navigationTitle("Place")
-            .navigationBarItems(trailing:
-                NavigationLink(destination: Authorview()){
-                    HStack{
-                        Image(systemName: "person.fill")
-                            .foregroundColor(.blue)
-                        Text("Author")
-                    .font(.headline).bold()
-                    .foregroundStyle(.blue)
+                    .listStyle(.plain)
+                
+                .navigationBarItems(leading:
+                    Text("Place in 🇮🇩")
+                    .font(.title).bold()
+                )
+                .navigationBarItems(trailing:
+                    NavigationLink(destination: Authorview()){
+                        HStack{
+                            Image(systemName: "person.fill")
+                                .foregroundColor(.blue)
+                            Text("Author")
+                        .font(.headline).bold()
+                        .foregroundStyle(.blue)
+                        }
                     }
-                }
             )
+                
+                Text("made with ❤️")
+            }
         }
     }
 }
